@@ -40,16 +40,17 @@ class DefaultController extends Controller
 
         // 参加予定ユーザーの取得
         $participationUsers = UserWorkshopDatetime::fetchList($workshopDetail->datetime_id);
-
+        $userCount = count($participationUsers);
         // 自身が既に参加申し込み済みか判定
         $alreadyApplied = $participationUsers->contains(function ($user, $index) {
             return $user->guest_user_id === Auth::id();
         });
-
+        
         return view('detail', [
             'workshop' => $workshopDetail,
             'participationUsers' => $participationUsers,
             'alreadyApplied' => $alreadyApplied,
+            'count' => $userCount,
         ]);
     }
 

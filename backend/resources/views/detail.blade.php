@@ -10,22 +10,15 @@
 
         @if (Auth::id() === $workshop->host_user_id)
             @if ($workshop->status === config('const.workshop.status.published'))
-                <p>参加予定のメンバー</p>
-                @foreach ($participationUsers as $user)
-                    <div class="bg-white p-6 shadow-lg rounded-lg flex justify-between items-center">
-                        <div class="flex">
-                            <div>
-                                <span class="text-xl font-medium">{{ $user->name }}</span>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+                <p class="inline-block my-4">このワークショップは現在、{{ $count }}人のユーザーが申し込んでいます。</p>
             @endif
         @elseif (!$alreadyApplied)
             {{ Form::open(['url' => route('workshop.join.confirm')]) }}
                 <!-- 参加申し込み確認画面に遷移 -->
                 <button name="id" value="{{ $workshop->id }}" type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">参加申し込み</button>
             {{ Form::close() }}
+        @else
+            既に参加申し込みいただいています
         @endif
     </div>
 </x-app-layout>
