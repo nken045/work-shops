@@ -18,7 +18,7 @@
                     @endif
                 {{ Form::close() }}
 
-                @include ('components.workshop-list', ['workshops' => $workshops])
+                @include ('components.workshop-list', ['workshops' => $workshops, 'view' => 'workshop.detail'])
 
             </div>
         </div>

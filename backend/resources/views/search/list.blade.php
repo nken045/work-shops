@@ -8,7 +8,7 @@
                 @empty ($workshops[0])
                     <p>条件に一致するワークショップはありません<p>
                 @else
-                    @include ('components.workshop-list', ['workshops' => $workshops])
+                    @include ('components.workshop-list', ['workshops' => $workshops, 'view' => 'detail'])
                 @endempty
             </div>
         </div>

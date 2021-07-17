@@ -1,5 +1,4 @@
-
-{{ Form::open(['url' => route('workshop.detail'), 'method' => 'GET']) }}
+{{ Form::open(['url' => route($view), 'method' => 'GET']) }}
     @foreach ($workshops as $workshop)
         {{ Form::hidden('status', $workshop->status) }}
         <button type="submit" name="id" value="{{ $workshop->id }}" class="ws-card-lg bg-white p-6 shadow-lg rounded-sm flex justify-between items-center">

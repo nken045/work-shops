@@ -1,10 +1,6 @@
 <x-app-layout>
-<!-- メインビジュアル -->
-<div></div>
-    <!-- メインビジュアル -->
-
     <!-- メインコンテンツ -->
-    <div class="mx-auto sm:px-6 lg:px-8 bg-white">
+    <div class="sm:px-6 lg:px-8 bg-white">
       <section class="bg-gray-100 p-12 search-pannel">
         {{ Form::open(['url' => route('search.list'), 'method' => 'GET']) }}
           <!-- <p>キーワードから探す</p>
