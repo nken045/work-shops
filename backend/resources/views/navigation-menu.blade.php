@@ -112,15 +112,23 @@
                             <div class="border-t border-gray-100"></div>
 
                             <!-- Authentication -->
+                            @auth
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
+                                
                                 <x-jet-dropdown-link href="{{ route('logout') }}"
                                          onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                     {{ __('Log Out') }}
                                 </x-jet-dropdown-link>
-                            </form>
+                            </form>    
+                            @else
+                            <x-jet-dropdown-link href="{{ route('login') }}">
+                                {{ __('Log in') }}
+                            </x-jet-dropdown-link>
+                            @endauth
+                            
                         </x-slot>
                     </x-jet-dropdown>
                 </div>
@@ -181,13 +189,12 @@
                     </x-jet-responsive-nav-link>
                 </form>
                 @else
-                <form method="POST" action="{{ route('login') }}">
+                <form method="GET" action="{{ route('login') }}">
                     @csrf
-
                     <x-jet-responsive-nav-link href="{{ route('login') }}"
                                    onclick="event.preventDefault();
                                     this.closest('form').submit();">
-                        {{ __('Log in') }}
+                        {{ __('Login') }}
                     </x-jet-responsive-nav-link>
                 </form>
                 @endauth

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Workshops\WorkshopController;
 use App\Http\Controllers\DefaultController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\MyPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,17 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::get('/search', [SearchController::class, 'index'])->name('search.list');
 //詳細
 Route::get('detail', [DefaultController::class, 'show'])->name('detail');
+
+/** マイページ */
+Route::group(['prefix' => 'mypage', 'middleware' => ['auth:sanctum', 'verified']], function () {    
+    // アカウント操作
+    // 開催ワークショップ操作（一覧）
+    Route::get('', [MyPageController::class, 'myWorkshop'])
+        ->name('mypage.my-workshop');
+    // 参加ワークショップ操作（一覧）
+    Route::get('joined', [MyPageController::class, 'joinedWorkshop'])
+        ->name('mypage.joined-workshop');
+});
 
 /** ワークショップ */
 Route::group(['prefix' => 'workshop', 'middleware' => ['auth:sanctum', 'verified']], function () {

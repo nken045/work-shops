@@ -55,8 +55,12 @@ class Workshop extends Model
      * @param int|null ユーザーID
      * @return Collection ワークショップ一覧
      */
-    public static function fetchList(String $status, int|null $userId, array|null $serchParam)
-    {
+    public static function fetchList(
+        String $status, 
+        int|null $userId, 
+        array|null $serchParam,
+        int|null $limit
+    ){
         // dd($status === config('const.workshop.status.unpublished'));
 
         $result =  Workshop::select([
@@ -68,7 +72,7 @@ class Workshop extends Model
             'workshops.description',
             'workshops.status',
         ])
-            ->when($status === config('const.workshop.status.unpublished'), function ($query) use ($userId) {
+            ->when(!is_null($userId) , function ($query) use ($userId) {
                 return $query->where('workshops.host_user_id', $userId);
             })
             ->where('workshops.status', $status)
@@ -77,23 +81,28 @@ class Workshop extends Model
                     ->whereNull('workshop_datetimes.deleted_at');
             })
             ->where('workshop_datetimes.event_date_time', '>', now());
+
+        if(!is_null($limit))
+        {
+            $result->limit($limit); 
+        }    
             
         if (!empty($serchParam))
         {
             if ($serchParam['category'] !== null)
-        {
-            $result->when(array_key_exists($serchParam['category'], Category::CATEGORY_LIST_LOGICAL), function ($query) use ($serchParam) {
-                return $query->where('workshops.category_id', $serchParam['category']);
-            });
-        } elseif ($serchParam['area'] !== null)
-        {
-            $result->when(array_key_exists($serchParam['area'], AreaConsts::PREFECTURE_LIST), function ($query) use ($serchParam) {
-                return $query->where('workshops.venue_id', $serchParam['area']);
-            });
-        }
+            {
+                $result->when(array_key_exists($serchParam['category'], Category::CATEGORY_LIST_LOGICAL), function ($query) use ($serchParam) {
+                    return $query->where('workshops.category_id', $serchParam['category']);
+                });
+            } elseif ($serchParam['area'] !== null)
+            {
+                $result->when(array_key_exists($serchParam['area'], AreaConsts::PREFECTURE_LIST), function ($query) use ($serchParam) {
+                    return $query->where('workshops.venue_id', $serchParam['area']);
+                });
+            }
         }    
-    
-            return $result->get();
+
+            return $result->orderBy('workshops.updated_at', 'desc')->get();
     }
 
     /**

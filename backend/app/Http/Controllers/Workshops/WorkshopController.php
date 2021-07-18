@@ -22,7 +22,7 @@ class WorkshopController extends Controller
     public function index(Request $request)
     {
         $status = $request->input('status') ?? config('const.workshop.status.published');
-        $workshopList = Workshop::fetchList($status, Auth::id(), null);
+        $workshopList = Workshop::fetchList($status, Auth::id(), null, null);
         return view('workshops.list', ['status' => $status, 'workshops' => $workshopList ]);
     }
 

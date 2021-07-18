@@ -1,3 +1,4 @@
+@isset ($workshops)
 {{ Form::open(['url' => route($view), 'method' => 'GET']) }}
     @foreach ($workshops as $workshop)
         {{ Form::hidden('status', $workshop->status) }}
@@ -15,3 +16,6 @@
         </button>
     @endforeach
 {{ Form::close() }}
+@else
+ご指定のワークショップはありません。
+@endisset
