@@ -18,6 +18,9 @@ services:
     build: ./infra/mysql
     volumes:
       - db-store:/var/lib/mysql
+  
+  mail:
+    image: catatnight/postfix
 
 volumes:
   db-store:
