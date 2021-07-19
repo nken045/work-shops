@@ -5,7 +5,7 @@ services:
     volumes:
       - ./backend:/work
     networks:
-        - work-shops_default  
+      - ws_network
 
   web:
     image: nginx:1.20-alpine
@@ -16,14 +16,14 @@ services:
       - ./infra/nginx/default.conf:/etc/nginx/conf.d/default.conf
     working_dir: /work
     networks:
-      - work-shops_default
+      - ws_network
 
   db:
     build: ./infra/mysql
     volumes:
       - db-store:/var/lib/mysql
     networks:
-      - work-shops_default
+      - ws_network
        
 
   mail:
@@ -31,13 +31,13 @@ services:
     ports:
       - "25:25"
     networks:
-      - work-shops_default
+      - ws_network
 
 volumes:
   db-store:
 
 networks:
-  work-shops_default:
+  ws_network:
     ipam:
      driver: default
      config:
