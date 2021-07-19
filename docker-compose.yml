@@ -28,6 +28,9 @@ services:
 
   mail:
     image: catatnight/postfix
+    environment:
+      - maildomain=wsm.com
+      - smtp_user=user:pass1234
     ports:
       - "25:25"
     networks:
