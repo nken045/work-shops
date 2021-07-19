@@ -31,7 +31,8 @@ services:
     ports:
       - "25:25"
     networks:
-      - ws_network
+      ws_network:
+        ipv4_address: "10.254.249.10"
 
 volumes:
   db-store:
