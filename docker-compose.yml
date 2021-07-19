@@ -24,6 +24,7 @@ services:
     volumes:
       - db-store:/var/lib/mysql
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   
   mail:
     image: catatnight/postfix
@@ -31,6 +32,10 @@ services:
     networks:
       - work-shops_default
   
+=======
+    networks:
+      - work-shops_default
+>>>>>>> Stashed changes
 
   mail:
     image: catatnight/postfix
@@ -38,6 +43,9 @@ services:
       - "25:25"
     networks:
       - work-shops_default
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 volumes:
