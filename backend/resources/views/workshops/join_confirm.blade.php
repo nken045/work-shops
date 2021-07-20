@@ -85,7 +85,7 @@
 
         {{ Form::open(['url' => route('workshop.join.complete')]) }}
             <!-- 参加申し込み確認画面に遷移 -->
-            <button name="id" value="{{ $workshop->datetime_id }}" type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">申し込む</button>
+            <button name="id" value="{{ $workshop->datetime_id }}" type="submit" class="bg-green-600 hover:bg-yellow-400 text-white font-bold py-3 px-7 mt-4 rounded">申し込む</button>
         {{ Form::close() }}
     </div>
 </x-app-layout>
