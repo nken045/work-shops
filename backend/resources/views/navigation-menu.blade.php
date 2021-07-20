@@ -9,16 +9,6 @@
                         <img class="block h-16 w-auto" src="{{ asset('img/logo-full_2.svg') }}" />
                     </a>
                 </div>
-
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('top') }}" :active="request()->routeIs('top')">
-                        {{ __('Top') }}
-                    </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('workshop.list') }}" :active="strstr($_SERVER['REQUEST_URI'], 'workshop')">
-                        {{ __('Workshop') }}
-                    </x-jet-nav-link>
-                </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -100,7 +90,7 @@
                             </div>
 
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">
-                                {{ __('Profile') }}
+                                {{ __('My Page') }}
                             </x-jet-dropdown-link>
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())

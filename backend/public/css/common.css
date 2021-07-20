@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
 
-body{ font: 14px/1.6 "Hiragino Kaku Gothic Pro",Osaka,"メイリオ","ＭＳ Ｐゴシック","MS PGothic",Verdana,Arial,sans-serif; margin:0; color:#333;}
+body{ font: 14px/1.6 "Hiragino Kaku Gothic Pro",Osaka,"メイリオ","ＭＳ Ｐゴシック","MS PGothic",Verdana,Arial,sans-serif; margin:0; color:#333; overflow-x: hidden; }
 img{ outline:none; border-style:none; }
 a{ color: #333; -webkit-transition: all 0.5s; -moz-transition: all 0.5s; transition: all 0.5s;}
 a:visited{ color: #333; -webkit-transition: all 0.5s; -moz-transition: all 0.5s; transition: all 0.5s;}
@@ -167,16 +167,26 @@ article .btn:hover{
 footer{
     font-size: 80%;
     width: 100vw;
-    height: 320px;
+    height: 240px;
     text-align: center;
-    padding-top: 10px;
+    padding-top: 40px;
     padding-bottom: 10px;
-    background-color: #F8F8F8;
+    background-color: #f3f4f6;
+    margin-top: 64px;
+    text-align: center;
+    position: relative;
 }
 footer address{
     color: #fff;
     letter-spacing: 5px;
 }
+footer img {
+    margin: auto;
+}
+footer .copyright {
+   margin: 64px auto 10px;
+}
+
 .error-msg {
     color: #dc2626;
 }
@@ -464,3 +474,5 @@ a:hover img.fade { opacity: 0.7; filter: alpha(opacity=70); -ms-filter: "alpha( 
 .text-ellipsis { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
 .ws-card-lg { width: 80%; margin: 20px auto; text-align: left; }
 
+.fluid-box-wrap { width: 100vw; position: relative; left: 50%; transform: translateX(-50%); }
+.fluid-box { margin: 24px auto 0; }

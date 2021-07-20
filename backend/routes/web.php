@@ -60,6 +60,9 @@ Route::group(['prefix' => 'workshop', 'middleware' => ['auth:sanctum', 'verified
     // 参加（実行）
     Route::post('join/complete', [WorkshopController::class, 'joinStore'])
         ->name('workshop.join.complete');
+    // 参加（チケット表示）
+    Route::post('entry-ticket', [WorkshopController::class, 'showTicket'])
+        ->name('workshop.entry-ticket');    
     // 更新（入力）
     Route::get('edit', [WorkshopController::class, 'edit'])
         ->name('workshop.edit');

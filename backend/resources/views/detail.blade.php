@@ -15,10 +15,14 @@
         @elseif (!$alreadyApplied)
             {{ Form::open(['url' => route('workshop.join.confirm')]) }}
                 <!-- 参加申し込み確認画面に遷移 -->
-                <button name="id" value="{{ $workshop->id }}" type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">参加申し込み</button>
+                <button name="id" value="{{ $workshop->id }}" type="submit" class="bg-green-600 hover:bg-yellow-400 text-white font-bold py-3 px-7 mt-4 rounded">参加申し込み</button>
             {{ Form::close() }}
         @else
             既に参加申し込みいただいています
+            {{ Form::open(['url' => route('workshop.entry-ticket')]) }}
+                <!-- 参加チケット表示画面に遷移 -->
+                <button name="id" value="{{ $workshop->id }}" type="submit" class="bg-green-600 hover:bg-yellow-400 text-white font-bold py-3 px-7 mt-4 rounded">参加チケット表示</button>
+            {{ Form::close() }}
         @endif
     </div>
 </x-app-layout>

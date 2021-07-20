@@ -44,6 +44,15 @@
                 {{ $slot }}
             </main>
         </div>
+        <footer>
+            <img src="{{ asset('img/logo_2.svg') }}" class="my-2" />
+            <ul>
+                <li><a href=""></a></li>
+            </ul>
+            <div class="copyright my-2">
+                <span>{{ __('Copyright') }}</span>
+            </div>
+        </footer>
 
         @stack('modals')
 

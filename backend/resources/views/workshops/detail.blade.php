@@ -22,14 +22,16 @@
                     </div>
                 @endforeach
             @endif
+            <div class="inline-flex m-auto">
             {{ Form::open(['url' => route('workshop.edit'), 'method' => 'GET']) }}
                 <!-- 更新 -->
-                <button name="id" value="{{ $workshop->id }}" type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">編集する</button>
+                <button name="id" value="{{ $workshop->id }}" type="submit" class="bg-white hover:bg-gray-300 text-gray-700 font-bold py-3 px-7 rounded btn-in-shadow">編集する</button>
             {{ Form::close() }}
             {{ Form::open(['url' => route('workshop.destroy')]) }}
                 <!-- 削除 -->
-                <button name="id" value="{{ $workshop->id }}" type="submit" onclick="return confirmDialog('ワークショップの削除')" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">このワークショップを削除する</button>
+                <button name="id" value="{{ $workshop->id }}" type="submit" onclick="return confirmDialog('ワークショップの削除')" class="bg-gray-500 hover:bg-red-500 hover:text-white text-gray-700 font-bold py-3 px-7 rounded btn-in-shadow">このワークショップを削除する</button>
             {{ Form::close() }}
+            </div>
         @elseif (!$alreadyApplied)
             {{ Form::open(['url' => route('workshop.join.confirm')]) }}
                 <!-- 参加申し込み確認画面に遷移 -->

@@ -27,7 +27,7 @@
         </div>
       
       </section>
-      <section class="my-48 p-12">
+      <section class="my-48 p-12 m-auto max-w-5xl">
         <h2>新着ワークショップ</h2>
         <div class="m-0">
         {{ Form::open(['url' => route('detail'), 'method' => 'GET']) }}
@@ -37,9 +37,15 @@
         {{ Form::close() }}
         </div>
       </section>
-      <section id="ws-link">
 
-      </section>
+      <section id="ws-link" class="my-48 orver-width fluid-box-wrap bg-gray-100">
+      <div class="fluid-box">
+      {{ Form::open(['url' => route('workshop.create'), 'method' => 'GET', 'class' => 'table m-auto']) }}
+          <button type="submit" class="bg-green-600 hover:bg-yellow-400 text-white text-xl font-bold w-96 py-4 px-16 rounded-md m-auto my-14">ワークショップを開催する</button>
+      {{ Form::close() }}
+      </div>
+      <section>
+
     </div>
     <!-- メインコンテンツ -->   
 </x-app-layout>

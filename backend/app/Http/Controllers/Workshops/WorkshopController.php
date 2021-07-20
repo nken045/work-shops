@@ -208,6 +208,40 @@ class WorkshopController extends Controller
     }
 
     /**
+     * 参加チケット表示
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function showTicket(Request $request)
+    {
+        $status = $request->input('status') ?? config('const.workshop.status.published');
+        // ワークショップの詳細を取得
+        $workshopDetail = Workshop::fetchDetail($request->input('id'), $status);
+        
+        // 結合テーブルの値をCarbonImmutableに変更
+        $workshopDetail->event_date_time = CarbonImmutable::parse($workshopDetail->event_date_time);
+
+        $entryDetail = UserWorkshopDatetime::fetchDetail($workshopDetail->datetime_id, Auth::id());
+        $name = Auth::user()->name;
+        // 参加予定ユーザーの取得
+        $participationUsers = UserWorkshopDatetime::fetchList($workshopDetail->datetime_id);
+    
+        // 自身が既に参加申し込み済みか判定
+        $alreadyApplied = $participationUsers->contains(function ($user, $index) {
+            return $user->guest_user_id === Auth::id();
+        });
+
+        return view('workshops.entry-ticket', [
+            'workshop' => $workshopDetail,
+            'entry' => $entryDetail,
+            'name' => $name,
+            'participationUsers' => $participationUsers,
+            'alreadyApplied' => $alreadyApplied,
+        ]);
+    }
+
+    /**
      * 参加（確認）
      *
      * @param  \Illuminate\Http\Request  $request
@@ -243,7 +277,7 @@ class WorkshopController extends Controller
             $userWorkshopDatetime->store($datetimeId, Auth::id());
         });
 
-        return redirect(route('workshop.list'));
+        return redirect(route('mypage.joined-workshop'));
     }
 
     /**
