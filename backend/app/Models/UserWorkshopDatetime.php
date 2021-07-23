@@ -52,7 +52,27 @@ class UserWorkshopDatetime extends Model
                 $join->on('user_workshop_datetime.guest_user_id', '=', 'users.id');
             })
             ->get();
-    }    
+    }
+
+    /**
+     * 参加情報取得
+     */
+    public static function fetchDetail(int $datetimeId, int $userId)
+    {
+        return UserWorkshopDatetime::select([
+            'user_workshop_datetime.datetime_id',
+            'user_workshop_datetime.guest_user_id',
+            'users.name',
+            'users.name_kana',
+            'users.nickname',
+        ])
+            ->where('datetime_id', $datetimeId)
+            ->where('users.id', $userId)
+            ->join('users', function ($join) {
+                $join->on('user_workshop_datetime.guest_user_id', '=', 'users.id');
+            })
+            ->get();
+    }
 
     /**
      * 登録
