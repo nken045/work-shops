@@ -5,8 +5,6 @@ use App\Http\Controllers\Workshops\WorkshopController;
 use App\Http\Controllers\DefaultController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\MyPageController;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\MailTest;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,12 +27,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::get('/search', [SearchController::class, 'index'])->name('search.list');
 //詳細
 Route::get('detail', [DefaultController::class, 'show'])->name('detail');
-
-//メール
-Route::get('/mail', function () {
-    $mail_text = "メールテストで使いたい文章";
-    Mail::to('to_address@example.com')->send(new MailTest($mail_text));
-});
 
 /** マイページ */
 Route::group(['prefix' => 'mypage', 'middleware' => ['auth:sanctum', 'verified']], function () {    
