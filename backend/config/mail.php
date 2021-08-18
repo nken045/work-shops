@@ -36,14 +36,21 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
-            'port' => env('MAIL_PORT', 587),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+            'driver' => env('MAIL_DRIVER', 'smtp'),
+            'host' => env('MAIL_HOST', 'mail'),
+            'port' => env('MAIL_PORT', 25),
+            'encryption' => env('MAIL_ENCRYPTION', ''),
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
             'auth_mode' => null,
         ],
+
+        'host' => env('MAIL_HOST', 'mail'),
+        'port' => env('MAIL_PORT', 25),
+        'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+        'username' => env('MAIL_USERNAME'),
+        'password' => env('MAIL_PASSWORD'),
 
         'ses' => [
             'transport' => 'ses',
@@ -72,6 +79,14 @@ return [
         ],
     ],
 
+    'stream' => [
+        'ssl' => [
+            'allow_self_signed' => true,
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+        ],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Global "From" Address
@@ -84,8 +99,13 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'ws_admin@work-shops.jp'),
+        'name' => env('MAIL_FROM_NAME', 'Workshop Market運営事務局'),
+    ],
+
+    'reply_to' => [
+        'address' => env('MAIL_FROM_ADDRESS', 'ws_admin@work-shops.jp'), 
+        'name' => env('MAIL_FROM_NAME', 'Workshop Market運営事務局'),
     ],
 
     /*
