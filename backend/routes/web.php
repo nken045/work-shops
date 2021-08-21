@@ -23,6 +23,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
+// Route::get('/admin', [DefaultController::class, 'viewAction'])->name('top');
+
 //検索結果一覧
 Route::get('/search', [SearchController::class, 'index'])->name('search.list');
 //詳細
