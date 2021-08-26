@@ -4,8 +4,6 @@ services:
     build: ./infra/php
     volumes:
       - ./backend:/work
-    networks:
-      - ws_network
 
   web:
     image: nginx:1.20-alpine
@@ -15,34 +13,11 @@ services:
       - ./backend:/work
       - ./infra/nginx/default.conf:/etc/nginx/conf.d/default.conf
     working_dir: /work
-    networks:
-      - ws_network
 
   db:
     build: ./infra/mysql
     volumes:
       - db-store:/var/lib/mysql
-    networks:
-      - ws_network
        
-
-  mail:
-    image: catatnight/postfix
-    environment:
-      - maildomain=work-shops.jp
-      - smtp_user=user:pass1234
-    ports:
-      - "25:25"
-    networks:
-      ws_network:
-        ipv4_address: "10.254.249.10"
-
 volumes:
   db-store:
-
-networks:
-  ws_network:
-    ipam:
-     driver: default
-     config:
-      - subnet: 10.254.249.0/24
