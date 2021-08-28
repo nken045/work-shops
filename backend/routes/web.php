@@ -17,13 +17,14 @@ use App\Http\Controllers\MyPageController;
 |
 */
 
+//TOP
 Route::get('/', [DefaultController::class, 'viewAction'])->name('top');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-// Route::get('/admin', [DefaultController::class, 'viewAction'])->name('top');
+Route::redirect('/dashboard', '/' , 301);
 
 //検索結果一覧
 Route::get('/search', [SearchController::class, 'index'])->name('search.list');
@@ -43,9 +44,7 @@ Route::group(['prefix' => 'mypage', 'middleware' => ['auth:sanctum', 'verified']
 
 /** ワークショップ */
 Route::group(['prefix' => 'workshop', 'middleware' => ['auth:sanctum', 'verified']], function () {
-    // 一覧
-    Route::get('', [WorkshopController::class, 'index'])
-        ->name('workshop.list');
+    //一覧はマイページに移設
     // 詳細
     Route::get('detail', [WorkshopController::class, 'show'])
         ->name('workshop.detail');

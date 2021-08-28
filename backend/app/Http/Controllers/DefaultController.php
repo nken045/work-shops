@@ -19,7 +19,7 @@ class DefaultController extends Controller
      */
     public function viewAction(Request $request){
         $status = config('const.workshop.status.published');
-        $workshopList = Workshop::fetchList($status, null, null, 3);
+        $workshopList = Workshop::fetchList($status, null, null, 3, null);
        return view('top', ['workshopList' => $workshopList]);
     }
 	

@@ -4,7 +4,7 @@
                 <ul class="flex flex-wrap text120 text-center bg-gray-100">
                     <li class="w-1/3 bg-gray-200"><a class="block my-3 p-1" href="{{ route('profile.show') }}">{{ __('Profile') }}</a></li>
                     <li class="w-1/3"><a class="block my-3 p-1" href="{{ route('mypage.my-workshop') }}">開催ワークショップ</a></li>
-                    <li class="w-1/3"><a class="block my-3 p-1" href="#">参加ワークショップ</a></li>
+                    <li class="w-1/3"><a class="block my-3 p-1" href="{{ route('mypage.joined-workshop') }}">参加ワークショップ</a></li>
                 </ul>
             </div>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">

@@ -20,7 +20,7 @@ class MyPageController extends Controller
     public function myWorkshop(Request $request)
     {
       $status = $request->input('status') ?? config('const.workshop.status.published');
-      $workshops = Workshop::fetchList($status, Auth::id(), null, null);
+      $workshops = Workshop::fetchList($status, Auth::id(), null, null, true);
       
       return view('mypage.my-workshop', ['status' => $status, 'workshops' => $workshops]);
     }
@@ -34,7 +34,7 @@ class MyPageController extends Controller
     public function joinedWorkshop(Request $request)
     {
       $status = $request->input('status') ?? config('const.workshop.status.published');
-      $workshops = Workshop::fetchList($status, Auth::id(), null, null);
+      $workshops = Workshop::fetchList($status, Auth::id(), null, null, false);
       
       return view('mypage.joined-workshop', ['status' => $status, 'workshops' => $workshops]);
     }

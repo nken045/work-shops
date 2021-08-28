@@ -155,6 +155,7 @@ return [
         'venue_id' => '開催地（都道府県）',
         'venue' => '開催地（都道府県以降）',
         'description' => '紹介文',
+        'category_id' => 'カテゴリ',
         'eventDateTime' => '開催日時',
         'caution' => '注意・警告事項',
         'cancellationDeadline' => 'キャンセル期限',

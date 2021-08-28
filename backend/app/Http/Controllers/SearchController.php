@@ -20,7 +20,7 @@ class SearchController extends Controller
             'category' => $request->input('category'),
             'area' => $request->input('venue_id'),
         ];
-        $searchResult = Workshop::fetchList($status, null, $searchPram, null);
+        $searchResult = Workshop::fetchList($status, null, $searchPram, null, null);
         return view('search.list', ['workshops' => $searchResult]);
     }
 }

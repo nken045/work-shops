@@ -57,12 +57,11 @@ class Workshop extends Model
      */
     public static function fetchList(
         String $status, 
-        int|null $userId, 
+        int|null $userId,
         array|null $serchParam,
-        int|null $limit
+        int|null $limit,
+        bool|null $isHost
     ){
-        // dd($status === config('const.workshop.status.unpublished'));
-
         $result =  Workshop::select([
             'workshops.id',
             'workshops.host_user_id',
@@ -72,15 +71,20 @@ class Workshop extends Model
             'workshops.description',
             'workshops.status',
         ])
-            ->when(!is_null($userId) , function ($query) use ($userId) {
-                return $query->where('workshops.host_user_id', $userId);
-            })
             ->where('workshops.status', $status)
             ->leftJoin('workshop_datetimes', function ($join) {
                 $join->on('workshops.id', '=', 'workshop_datetimes.workshop_id')
                     ->whereNull('workshop_datetimes.deleted_at');
             })
-            ->where('workshop_datetimes.event_date_time', '>', now());
+            ->leftJoin('user_workshop_datetime', function ($join) {
+                $join->on('workshop_datetimes.id', '=', 'user_workshop_datetime.datetime_id')
+                    ->whereNull('user_workshop_datetime.deleted_at');
+            })
+            ->where('workshop_datetimes.event_date_time', '>', now())
+            ->when(!is_null($userId) , function ($query) use ($userId, $isHost) {
+                if ($isHost) return $query->where('workshops.host_user_id', $userId);
+                return $query->where('user_workshop_datetime.guest_user_id', $userId);
+            });
 
         if(!is_null($limit))
         {
