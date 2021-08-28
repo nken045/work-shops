@@ -15,6 +15,7 @@ class WorkshopController extends Controller
 {
     /**
      * 一覧表示
+     * MyPageに移行。現在使ってない
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -22,7 +23,7 @@ class WorkshopController extends Controller
     public function index(Request $request)
     {
         $status = $request->input('status') ?? config('const.workshop.status.published');
-        $workshopList = Workshop::fetchList($status, Auth::id(), null, null);
+        $workshopList = Workshop::fetchList($status, Auth::id(), null, null, true);
         return view('workshops.list', ['status' => $status, 'workshops' => $workshopList ]);
     }
 
@@ -50,6 +51,7 @@ class WorkshopController extends Controller
             'venue_id' => 'required',
             'venue' => 'required|max:255',
             'description' => 'required|min:20|max:2000',
+            'category_id' => 'required',
             'eventDateTime' => 'required|date',
             'caution' => 'required|max:255',
             'cancellationDeadline' => 'required|date|before_or_equal:eventDateTime',
@@ -142,7 +144,7 @@ class WorkshopController extends Controller
             $request->session()->pull('isEdit')
         );
 
-        return redirect(route('workshop.list'));
+        return redirect(route('mypage.my-workshop'));
     }
 
     /**
@@ -353,6 +355,6 @@ class WorkshopController extends Controller
             $workshop = new Workshop();
             $workshop->deleteById($workshopId);
         });
-        return redirect(route('workshop.list'));
+        return redirect(route('mypage.my-workshop'));
     }
 }

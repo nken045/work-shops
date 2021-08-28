@@ -49,7 +49,7 @@
                 {{ Form::label('category_id', __('Category')) }}
                 {{ Form::select('category_id', App\Consts\Category::CATEGORY_LIST_PHYSICS, session('category_id'), ['class' => 'mt-1 block w-full', 'placeholder' => '']) }}
                 @if ($errors->has('description'))
-                    <p class="error-msg">{{ $errors->first('description') }}</p>
+                    <p class="error-msg">{{ $errors->first('category_id') }}</p>
                 @endif
             </div>
 
